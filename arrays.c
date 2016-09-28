@@ -19,8 +19,10 @@ int main()
 			array[m][n] = (char*)malloc( sizeof( char) );
 			// assign the value at that position
 			array[m][n] = '_';
-			// if the m and n are equal, set as a *
+			// if the m and n are equal, set as a * (diagonal from top left)
 			if(m==n) array[m][n] = '*';
+			// diagonal from top right
+			if(m+n == BOARDSIZE - 1) array[m][n] = '*';
 			// print all the chars in the array
 			printf("%c",array[m][n]);
 		}
