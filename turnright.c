@@ -14,18 +14,20 @@ void turnright()
 	//we can measure the turn for consistency
 	ResetAllTachoCounts(OUT_AD);
 
-	//we synchronize the motors A and D, setting A's speed to 20, and D's speed
-	//to -200. I don't remember what the 0 does, but the fourth argument should
-	//be 0.
-	OnFwdSyncEx(OUT_AD,20,-200,0);
+	//for turning right, we set motor A to move forward at speed 40
+	//and motor D to move backwards at speed 40
+	SetPower(OUT_A, 40);
+	SetPower(OUT_D, -40);
+	//then we turn the motors on
+	On(OUT_ALL);
 
-	//We track the rotation of motor A, and continue to rotate until the
+	//We track the rotation of motor D, and continue to rotate until the
 	//tachometer's count is -191.
-	while(MotorRotationCount(OUT_A)>-191)
-	{
-		//I had to remove the button check feature, since that was causing
-		//segfaults for some reason. Now it just rotates until completion.
-	}
+	//we don't do anything while this is looping
+	//because OUT_D is negative and we reset the tachometer,
+	//it will start at 0 and decrease. we continue the loop until
+	//it decreases to a number lower than -191
+	while(MotorRotationCount(OUT_D)>-191){ }
 	//then we turn all the motors off
 	Off(OUT_ALL);
 }

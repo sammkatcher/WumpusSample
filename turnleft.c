@@ -13,18 +13,22 @@ void turnleft()
 	//we can measure the turn for consistency
 	ResetAllTachoCounts(OUT_AD);
 
-	//we synchronize the motors A and D, setting A's speed to 20, and D's speed
-	//to 200. I don't remember what the 0 does, but the fourth argument should
-	//be 0.
-	OnFwdSyncEx(OUT_AD,20,200,0);
+	//we set the motors to move in opposite directions, at the same speed
+	SetPower(OUT_A, -40);
+	SetPower(OUT_D, 40);
+	//then turn the motors on. This should robot rotate in place
+	On(OUT_ALL);
 	
 	//We track the rotation of motor A, and continue to rotate until the
-	//tachometer's count is -191.
-	while(MotorRotationCount(OUT_A)<187)
+	//tachometer's count is -187
+	//the rotation count starts at 0 because of the tacho counter reset
+	//and decreases because the motor's rotation is in the negative direction
+	//when it gets lower than -187, we turn the motors off
+	while(MotorRotationCount(OUT_A)>-187)
 	{
-		//I had to remove the button check feature, since that was causing
-		//segfaults for some reason. Now it just rotates until completion.
-	};
+		//We don't do anything here, we simply look at the tacho and decide
+		//whether to continue the loop or break out and turn the motor off
+	}
 
 	//then we turn all the motors off
 	Off(OUT_ALL);
