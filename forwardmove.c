@@ -110,8 +110,6 @@ int main()
 		}
 	}
 	
-	
-	
 	//then call the forward function
 	//forward();
 	
