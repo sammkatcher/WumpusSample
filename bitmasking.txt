@@ -1,0 +1,17 @@
+Bitmasking is the process of taking a binary value and only looking at certain pieces of it.
+For example, if you have an 8-bit number, like 01101100, but you only care about the last 4 bits for your program, how do you ignore the rest of it?
+That's where a bitmask comes in handy.
+The feature that we're specifically interested in is called "bitwise and", the "&" operator.
+How bitwise and works is it compares two values, bit-by-bit, and if the bits are both 1, it sets that bit value to 1.
+For example, if we compared these numbers:
+01101001
+11011001
+We would see that they both have 1's in the 2nd, 5th, and 8th bits from left to right. 
+Logical and would therefore return a number with 1's in the 2nd, 5th, and 8th bits from left to right, and 0 in the other bits
+01001001
+
+Bitmasking is the use of this property in order to look at the parts of a number that you care about.
+I use this in my sample code when we read from the light sensors, because the only part of the number that we care about from the light sensors it the last 8 bits.
+So, in order to accomplish that, we use a bitmask of 0x000000FF; that is to say we do bitwise and with a binary number whose last 8 bits are 1's.
+0x000000FF is the hexadecimal representation of 00000000000000000000000011111111. 
+We include the extra 0's at the beginning because of a weird bug that can happen sometimes where the compiler assumes that 0xFF is a signed integer, and left extends with 1's in order to keep the signedness of the number.

@@ -31,18 +31,16 @@ void forward_serial_read()
 	while(sensor < THRESHOLD)
 	{
 		//we will continue to execute the code in this block while the sensor
-		//is picking up a value less than the threshold. This will likely mean that, while the robot is
+		//is picking up a value less than the threshold. This should mean that, while the robot is
 		//over a black (or in general, dark) surface, it will continue to repeat these instructions
 	
 		//we read the value from serial port 1 into the temp variable
 		temp = ReadSerial(1);
+
+		//the serial read returns a 12-bit value, and the only part we care about is the last 8 bits, so we use a bitmask
+		//to evaluate the input correctly. For more information about bitmasking, see the readme about it
+		sensor = temp & 0x000000FF;
 	
-		//the invalid values that we want to throw away tend to be in the 400-1700 range, we only want
-		//to look at values that are less than 100. You should never receive valid values above 100.
-		if(temp < 100)
-		{
-			sensor = temp;//assuming the temporary value we just read is valid, we store it into the sensor variable
-		}
 	}
 	
 	//Once we've finished moving, we turn the motors off and return
