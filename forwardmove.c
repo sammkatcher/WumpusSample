@@ -11,14 +11,13 @@
 void forward_serial_read()
 {
 	//We set the "threshold" value for determining what color we're looking at
-	//to 100, but this number will almost definitely be different for you.
+	//to 20, but this number may be different for you.
 	int THRESHOLD = 20;
 	
 	//"sensor" is where we'll store the value that is returned by the sensor on out bot
 	int sensor = 0;
 	
-	//this variable is to help us decide what values to throw away and what to keep
-	//because the sensors aren't completely reliable.
+	//before we can use the input, we have to make some changes to it, so we use a temporary variable
 	int temp = 0;
 	
 	//We set the power level for the motors before moving forward until a line
