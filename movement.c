@@ -19,26 +19,26 @@
  *   the actual setup of your robot
  * These values reflect the port names 
  */
-#define LEFT_MOTOR OUT_A
-#define RIGHT_MOTOR OUT_D
+#define LEFT_MOTOR OUT_D
+#define RIGHT_MOTOR OUT_A
 #define BOTH_MOTORS OUT_AD
 
 /* Change 1 and 4 to match
  *   the actual setup of your robot
  * These values reflect the port numbers 
  */
-#define LEFT_SENSOR 1
-#define RIGHT_SENSOR 4
+#define LEFT_SENSOR 3
+#define RIGHT_SENSOR 1
 
 /* These values will be positive or 
  *   negative depending on the design
  *   of your robot. Additionally, the
  *   value will have to be calibrated
  */
-#define RIGHT_MOTOR_FORWARD -40
-#define RIGHT_MOTOR_BACKWARD 40
-#define LEFT_MOTOR_FORWARD -40
-#define LEFT_MOTOR_BACKWARD 40
+#define RIGHT_MOTOR_FORWARD 40
+#define RIGHT_MOTOR_BACKWARD -40
+#define LEFT_MOTOR_FORWARD 40
+#define LEFT_MOTOR_BACKWARD -40
 
 /* These value affect the distance travelled
  *   when only moving forward or backward.
@@ -47,16 +47,16 @@
  *   into the square after aligning to the line
  *   with sensor_forward() and sensor_backward()
  */
-#define FORWARD_WAIT 3000
-#define BACKWARD_WAIT 3000
+#define FORWARD_WAIT 4000
+#define BACKWARD_WAIT 4000
 
 /* These are wait times; longer wait times
  *   mean that turns will be longer. This
  *   is only used in simple_right() and
  *   simple_left()
  */
-#define TURN_RIGHT_WAIT 380
-#define TURN_LEFT_WAIT 395
+#define TURN_RIGHT_WAIT 1000
+#define TURN_LEFT_WAIT 1000
 
 /* These values are stopping thresholds for
  *   turning in each direction. Higher numbers
@@ -87,7 +87,7 @@
 
 
 
-void simple_backward()
+void simple_forward()
 {
     SetPower(RIGHT_MOTOR, RIGHT_MOTOR_FORWARD);
     SetPower(LEFT_MOTOR, LEFT_MOTOR_FORWARD);
@@ -96,7 +96,7 @@ void simple_backward()
     Off(OUT_ALL);
 }
 
-void simple_forward()
+void simple_backward()
 {
     SetPower(RIGHT_MOTOR, RIGHT_MOTOR_BACKWARD);
     SetPower(LEFT_MOTOR, LEFT_MOTOR_BACKWARD);
@@ -340,8 +340,8 @@ int main()
         fflush(stdout);*/
 
         #ifdef ROBOT_CONNECTED
-        simple_forward();
-        //simple_turn_right();
+        //simple_forward();
+        simple_turn_right();
         //simple_turn_left();
         print_sensor();
         /*sensor_forward();
