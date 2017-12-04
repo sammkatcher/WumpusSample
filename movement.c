@@ -47,30 +47,30 @@
  *   into the square after aligning to the line
  *   with sensor_forward() and sensor_backward()
  */
-#define FORWARD_WAIT 4000
-#define BACKWARD_WAIT 4000
+#define FORWARD_WAIT 2000
+#define BACKWARD_WAIT 2000
 
 /* These are wait times; longer wait times
  *   mean that turns will be longer. This
  *   is only used in simple_right() and
  *   simple_left()
  */
-#define TURN_RIGHT_WAIT 1000
-#define TURN_LEFT_WAIT 1000
+#define TURN_RIGHT_WAIT 1500
+#define TURN_LEFT_WAIT 1400
 
 /* These values are stopping thresholds for
  *   turning in each direction. Higher numbers
  *   mean that the robot turns more
  */
-#define TURN_RIGHT_DIST 2000
-#define TURN_LEFT_DIST 2000
+#define TURN_RIGHT_DIST 400
+#define TURN_LEFT_DIST 400
 
 /* This value will have to be adjusted
  *   according to the setup of your robot
  *   and the lighting conditions of the 
  *   room
  */
-#define SENSOR_THRESHHOLD 4
+#define SENSOR_THRESHHOLD 20
 #define SENSOR_BITMASK 0x000000FF
 
 
@@ -157,7 +157,6 @@ void sensor_forward()
     } while((right_sensor_value < SENSOR_THRESHHOLD) && 
             (left_sensor_value < SENSOR_THRESHHOLD));
     Off(OUT_ALL);
-
     // Next, we want to adjust based on which is on the line
 
     // If both sensors are on the line, just go forward
@@ -300,6 +299,21 @@ void turn_left()
     Off(OUT_ALL);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+
+void go_reft(){
+    turn_left();
+    sensor_forward();
+}
+
+void go_right(){
+    turn_right();
+    sensor_forward();
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+
 
 int main()
 {
@@ -340,14 +354,18 @@ int main()
         fflush(stdout);*/
 
         #ifdef ROBOT_CONNECTED
-        //simple_forward();
+       /* simple_forward();
         simple_turn_right();
-        //simple_turn_left();
-        print_sensor();
-        /*sensor_forward();
-        sensor_backward();
-        turn_right();
-        turn_left();*/
+        simple_turn_left();
+        print_sensor();*/
+        if (input == 1)
+           sensor_forward();
+        if (input == 2)
+            sensor_backward();
+        if (input == 3)
+            turn_right();
+        if (input ==4)
+            turn_left();
         #endif
     }
 

@@ -54,3 +54,29 @@ int getObjectInfo(char object)
 	
 	return 0;
 }
+
+int main(){
+	// Sample grid
+	#ifndef ROBOT_CONNECTED
+	char testgrid [4][4];
+	testgrid[0][0] = 's';
+	testgrid[0][1] = 's';
+	testgrid[0][2] = 's';
+	testgrid[0][3] = 'w';
+	testgrid[1][0] = 's';
+	testgrid[1][1] = 's';
+	testgrid[1][2] = 'p';
+	testgrid[1][3] = 's';
+	testgrid[2][0] = 's';
+	testgrid[2][1] = 's';
+	testgrid[2][2] = 's';
+	testgrid[2][3] = 's';
+	testgrid[3][0] = 's';
+	testgrid[3][1] = 's';
+	testgrid[3][2] = 'g';
+	testgrid[3][3] = 'p';
+	
+	int senseNumber = getSenseNumber(char testgrid, int x, int y, int BOARDSIZE);
+
+	#endif
+}
