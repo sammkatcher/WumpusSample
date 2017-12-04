@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-/*#include "ev3_output.h"
+#include "ev3_output.h"
 #include "ev3_command.h"
 #include "ev3_button.h"
 #include "ev3_timer.h"
 #include "ev3_lcd.h"
-#include "movement.c"*/
+#include "movement.c"
 
 
 // Variables

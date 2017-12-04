@@ -47,23 +47,23 @@
  *   into the square after aligning to the line
  *   with sensor_forward() and sensor_backward()
  */
-#define FORWARD_WAIT 1000
-#define BACKWARD_WAIT 1000
+#define FORWARD_WAIT 3000
+#define BACKWARD_WAIT 3000
 
 /* These are wait times; longer wait times
  *   mean that turns will be longer. This
  *   is only used in simple_right() and
  *   simple_left()
  */
-#define TURN_RIGHT_WAIT 2000
-#define TURN_LEFT_WAIT 2000
+#define TURN_RIGHT_WAIT 380
+#define TURN_LEFT_WAIT 395
 
 /* These values are stopping thresholds for
  *   turning in each direction. Higher numbers
  *   mean that the robot turns more
  */
-#define TURN_RIGHT_DIST 150
-#define TURN_LEFT_DIST 150
+#define TURN_RIGHT_DIST 2000
+#define TURN_LEFT_DIST 2000
 
 /* This value will have to be adjusted
  *   according to the setup of your robot
@@ -87,7 +87,7 @@
 
 
 
-void simple_forward()
+void simple_backward()
 {
     SetPower(RIGHT_MOTOR, RIGHT_MOTOR_FORWARD);
     SetPower(LEFT_MOTOR, LEFT_MOTOR_FORWARD);
@@ -96,7 +96,7 @@ void simple_forward()
     Off(OUT_ALL);
 }
 
-void simple_backward()
+void simple_forward()
 {
     SetPower(RIGHT_MOTOR, RIGHT_MOTOR_BACKWARD);
     SetPower(LEFT_MOTOR, LEFT_MOTOR_BACKWARD);
@@ -341,13 +341,13 @@ int main()
 
         #ifdef ROBOT_CONNECTED
         simple_forward();
-        simple_turn_right();
-        simple_turn_left();
+        //simple_turn_right();
+        //simple_turn_left();
         print_sensor();
-        sensor_forward();
+        /*sensor_forward();
         sensor_backward();
         turn_right();
-        turn_left();
+        turn_left();*/
         #endif
     }
 
