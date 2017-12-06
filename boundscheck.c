@@ -4,13 +4,16 @@
 
 // only works on a square board
 bool isOutofBounds(int x, int y, int max){
-	if(x < max && x < 0){
-		printf("False\n");
-		return false;
+	if(x <= 0 && x < max){
+		printf("X in Bounds");
+		if (y <= 0 && y < max){
+			printf("Y in Bounds\n");
+			return false;
+		}
 	}
 	else{
-	printf("True\n");
-	return true;
+		printf("Out of Bounds\n");
+		return true;
 	}
 };
 

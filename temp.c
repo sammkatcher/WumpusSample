@@ -30,7 +30,6 @@ int getSenseNumber(char[BOARDSIZE][BOARDSIZE] grid, int x, int y, BOARDSIZE)
 	{
 		sense |= 8;
 	}
-	
 	return sense;
 }
 
@@ -53,6 +52,17 @@ int getObjectInfo(char object)
 	}
 	
 	return 0;
+}
+
+
+
+void UpdateBoard(int input){
+	// given an input
+	// given as a number that is a sum of the possible inputs
+	// gold = 8, glimmer = 4, stench = 2, breeze = 1, nothing = 0
+	// code does not keep track of the orientation of the robot
+	// if the add is greater than 8, you're on the gold. cannot take more user input.
+	//must go back to start.
 }
 
 int main(){

@@ -7,6 +7,7 @@
 #include "ev3_timer.h"
 #include "ev3_lcd.h"
 #include "movement.c"
+#include "boundscheck.c"
 
 
 // Variables
@@ -39,20 +40,24 @@ typedef struct point_struct { int x,y; } point;
 }
 */
 
-void UpdateBoard(){
-	// given an input
-	// given as a number that is a sum of the possible inputs
-	// gold = 8, glimmer = 4, stench = 2, breeze = 1, nothing = 0
-	// code does not keep track of the orientation of the robot
-	// if the add is greater than 8, you're on the gold. cannot take more user input. must go back to start.
-}
+// only works on a square board
+bool isOutofBounds(int x, int y, int max){
+	if(x <= 0 && x < max){
+		printf("X in Bounds");
+		if (y <= 0 && y < max){
+			printf("Y in Bounds\n");
+			return false;
+		}
+	}
+	else{
+		printf("Out of Bounds\n");
+		return true;
+	}
+};
+
 
 int main(){
-	//we need to initialize main
-	//This is necessary at the beginning of main in order to prevent the
-	//robot from doing really dumb stuff. It initializes motor values and
-	//things like that so you can successfully start them
-	
+
 	#ifdef ROBOT_CONNECTED
     OutputInit();
     #endif

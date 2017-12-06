@@ -47,8 +47,8 @@
  *   into the square after aligning to the line
  *   with sensor_forward() and sensor_backward()
  */
-#define FORWARD_WAIT 2000
-#define BACKWARD_WAIT 2000
+#define FORWARD_WAIT 2500
+#define BACKWARD_WAIT 1600
 
 /* These are wait times; longer wait times
  *   mean that turns will be longer. This
@@ -62,8 +62,8 @@
  *   turning in each direction. Higher numbers
  *   mean that the robot turns more
  */
-#define TURN_RIGHT_DIST 400
-#define TURN_LEFT_DIST 400
+#define TURN_RIGHT_DIST 350
+#define TURN_LEFT_DIST 360
 
 /* This value will have to be adjusted
  *   according to the setup of your robot
@@ -357,7 +357,7 @@ int main()
        /* simple_forward();
         simple_turn_right();
         simple_turn_left();
-        print_sensor();*/
+        print_sensor();
         if (input == 1)
            sensor_forward();
         if (input == 2)
@@ -365,7 +365,7 @@ int main()
         if (input == 3)
             turn_right();
         if (input ==4)
-            turn_left();
+            turn_left();*/
         #endif
     }
 
