@@ -115,6 +115,16 @@ void foundBreeze(my_grid[cur_x][cur_y]){
 	updateMightBe(my_grid[cur_x][cur_y], 'b');
 }
 
+void goldNearPitEdgeCase(){
+	// Given: 3 squares around you. 1 is safe, 1 is a pit (location known), 1 is unknown.
+	// Sense: Breeze and Glimmer
+
+	// you will still get the breeze from the pit and no matter what you will be unable to go to the gold
+	// EDGE CASE! So..
+	// if (total number of  surrounding squares - 1) does not contain Uknown, Gold, Potential Gold, 
+	// then the Unknown must be the Gold.
+}
+
 void triangulateDanger(){
 	// if you know 4 squares around an object has a sense, then the something in the middle is defininte
 	//if you know 3 squares around an object that also is on an edge, it's something definite
