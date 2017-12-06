@@ -10,7 +10,7 @@
 
 
 /********************************************
-**                                         **
+**  MODIFIED PROVIDED CODE                 **
 **  These are the values you will change.  **
 **                                         **
 ********************************************/
@@ -74,18 +74,11 @@
 #define SENSOR_BITMASK 0x000000FF
 
 
-
-
-
-
-
 /******************************************
-**                                       **
+**  UNMODIFIED PROVIDED CODE             **
 **  Change this stuff at your own risk.  **
 **                                       **
 ******************************************/
-
-
 
 void simple_forward()
 {
@@ -315,7 +308,7 @@ void go_right(){
 /////////////////////////////////////////////////////////////////////////////
 
 
-int main()
+/*int main()
 {
     #ifdef ROBOT_CONNECTED
     OutputInit();
@@ -335,23 +328,6 @@ int main()
             fflush(stdout);
             break;
         }
-        // extract information from the input here 
-
-
-        // Using a single ampersand does bitwise and to
-        //   determine what the input is.
-/*        if(input & 0x00000008) // Input is: on gold
-            printf("Gold! ");
-        if(input & 0x00000004) // Input is: near gold
-            printf("Glimmer! ");
-        if(input & 0x00000002) // Input is: near wumpus
-            printf("Wumpus! ");
-        if(input & 0x00000001) // Input is: near hole
-        {
-            printf("Breeze! ");
-        }
-        printf("\n");
-        fflush(stdout);*/
 
         #ifdef ROBOT_CONNECTED
        /* simple_forward();
@@ -365,7 +341,7 @@ int main()
         if (input == 3)
             turn_right();
         if (input ==4)
-            turn_left();*/
+            turn_left();
         #endif
     }
 
@@ -374,3 +350,4 @@ int main()
     #endif
     return 0;
 }
+*/
