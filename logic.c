@@ -124,7 +124,12 @@ void processesInputAndUpdateSurrounding(int input, point cur_loc, square my_grid
     	printf("Breeze! ");	
     	foundBreeze(my_grid[cur_x][cur_y]);
     }
-    
+    if(input & 0x00000000){
+    	// Input is: near hole
+    	printf("Nothing! ");	
+    	foundNoInput(my_grid[cur_x][cur_y]);
+    }
+
     printf("\n");
     fflush(stdout);
 }
