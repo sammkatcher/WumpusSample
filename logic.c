@@ -23,6 +23,9 @@ void updateMightBe(char x, , square sqr){
 	if (x == 'b'){ // might be pit
 		sqr.mightBePit = true;
 	}
+	if (x == 'n'){ //will be nothing (safe)
+		sqr.isSafe = true;
+	}
 }
 
 void updatesSurroundingMightBes(square my_grid[BOARDSIZE][BOARDSIZE], point cur_loc, char x){
@@ -63,6 +66,11 @@ void foundStench(square mysqr){
 void foundBreeze(square mysqr){
 	printf("Found breeze!\n");
 	updatesSurroundingMightBes(mysqr, 'b');
+}
+
+void foundNoInput(sqr mysqr){
+	printf("Found no input!\n");
+	updatesSurroundingMightBes(mysqr, 'n');
 }
 
 //////////////////////////////////////////////////////////////////
