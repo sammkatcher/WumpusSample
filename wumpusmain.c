@@ -89,13 +89,6 @@ int main(){
 	grid[0][0].isSafe = true;
 	grid[0][0].visited = true;
 	
-
-	
-	// Get information about the spaces around the one it's currently in (as a number)
-	// Parse information about cur space to figure out what's up (glimmers, breeze, smell)
-	// 
-	// Move accordingly
-
 	return 0;
 
 	int instruction = 0;

@@ -156,11 +156,7 @@ void convertSenseNumber(int input, point cur_loc, square my_grid[BOARDSIZE][BOAR
     if(input & 0x00000002){
     	// Input is: near wumpus
         printf("Wumpus! ");
-    	my_grid[cur_x+1][cur_y].mightBeWumpus = true;
-    	my_grid[cur_x-1][cur_y].mightBeWumpus = true;
-    	my_grid[cur_x][cur_y+1].mightBeWumpus = true;
-    	my_grid[cur_x][cur_y-1].mightBeWumpus = true;
-
+    	
     }
     if(input & 0x00000001){
     	// Input is: near hole
