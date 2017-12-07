@@ -292,13 +292,4 @@ void turn_left()
     Off(OUT_ALL);
 }
 
-void go_left(){
-    turn_left();
-    sensor_forward();
-}
-
-void go_right(){
-    turn_right();
-    sensor_forward();
-}
 

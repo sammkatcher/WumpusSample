@@ -13,6 +13,18 @@ bool isOutofBounds(int x, int y, int max){
 	}
 }
 
+void updateMightBe(char x, , square sqr){
+	if (x == 'g'){ // mightBeGold
+		sqr.mightBeGold = true;
+	}
+	if (x == 's'){ // might be wumpus
+		sqr.mightBeWumpus = true;
+	}
+	if (x == 'b'){ // might be pit
+		sqr.mightBePit = true;
+	}
+}
+
 void updatesSurroundingMightBes(square my_grid[BOARDSIZE][BOARDSIZE], point cur_loc, char x){
 	if (!isOutOfBounds(my_grid[cur_x+1][cur_y]) && (my_grid[cur_x+1][cur_y].isUnknown)){
 		updateMightBe(x, my_grid[cur_x+1][cur_y]);
@@ -25,18 +37,6 @@ void updatesSurroundingMightBes(square my_grid[BOARDSIZE][BOARDSIZE], point cur_
 	}
 	if (!isOutOfBounds(my_grid[cur_x][cur_y-1]) && (my_grid[cur_x][cur_y-1].isUnknown)){
 		updateMightBe(x, my_grid[cur_x][cur_y-1]);
-	}
-}
-
-void updateMightBe(char x, , square sqr){
-	if (x == 'g'){ // mightBeGold
-		sqr.mightBeGold = true;
-	}
-	if (x == 's'){ // might be wumpus
-		sqr.mightBeWumpus = true;
-	}
-	if (x == 'b'){ // might be pit
-		sqr.mightBePit = true;
 	}
 }
 
