@@ -13,13 +13,13 @@
 // Variables
 struct square_struct {
 	bool isUnknown;
+	bool isSafe;
 	bool isWumpus;
 	bool isPit;
 	bool isGold;
 	bool mightBeWumpus;
 	bool mightBePit;
 	bool mightBeGold;
-	bool visited;
 
 } square_default = {true, false, false, false, false, false, false, false, false};
 

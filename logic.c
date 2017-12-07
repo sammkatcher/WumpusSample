@@ -1,8 +1,8 @@
 // only works on a square board
 bool isOutofBounds(int x, int y, int max){
-	if(x <= 0 && x < max){
+	if(x >= 0 && x < max){
 		printf("X in Bounds");
-		if (y <= 0 && y < max){
+		if (y >= 0 && y < max){
 			printf("Y in Bounds\n");
 			return false;
 		}
@@ -26,40 +26,41 @@ void updateMightBe(char x, , square sqr){
 }
 
 void updatesSurroundingMightBes(square my_grid[BOARDSIZE][BOARDSIZE], point cur_loc, char x){
-	if (!isOutOfBounds(my_grid[cur_x+1][cur_y]) && (my_grid[cur_x+1][cur_y].isUnknown)){
+	bool case1 = !(my_grid[cur_x+1][cur_y].isSafe && my_grid[cur_x+1][cur_y].isWumpus && 
+				my_grid[cur_x+1][cur_y].isPit && my_grid[cur_x+1][cur_y].isGold);
+	bool case2 = !(my_grid[cur_x-1][cur_y].isSafe && my_grid[cur_x-1][cur_y].isWumpus && 
+				my_grid[cur_x-1][cur_y].isPit && my_grid[cur_x-1][cur_y].isGold);
+	bool case3 = !(my_grid[cur_x][cur_y+1].isSafe && my_grid[cur_x][cur_y+1].isWumpus && 
+				my_grid[cur_x][cur_y+1].isPit && my_grid[cur_x][cur_y+1].isGold);
+	bool case4 = !(my_grid[cur_x][cur_y-1].isSafe && my_grid[cur_x][cur_y-1].isWumpus && 
+				my_grid[cur_x][cur_y-1].isPit && my_grid[cur_x][cur_y-1].isGold);
+
+	if (!isOutOfBounds(my_grid[cur_x+1][cur_y]) && (case1)){
 		updateMightBe(x, my_grid[cur_x+1][cur_y]);
 	}
-	if (!isOutOfBounds(my_grid[cur_x-1][cur_y]) && (my_grid[cur_x-1][cur_y].isUnknown)){
+	if (!isOutOfBounds(my_grid[cur_x-1][cur_y]) && (case2)){
 		updateMightBe(x, my_grid[cur_x-1][cur_y]);
 	}
-	if (!isOutOfBounds(my_grid[cur_x][cur_y+1]) && (my_grid[cur_x][cur_y+1].isUnknown)){
+	if (!isOutOfBounds(my_grid[cur_x][cur_y+1]) && (case3)){
 		updateMightBe(x, my_grid[cur_x][cur_y+1]);
 	}
-	if (!isOutOfBounds(my_grid[cur_x][cur_y-1]) && (my_grid[cur_x][cur_y-1].isUnknown)){
+	if (!isOutOfBounds(my_grid[cur_x][cur_y-1]) && (case4)){
 		updateMightBe(x, my_grid[cur_x][cur_y-1]);
 	}
 }
 
 ///////////////////////////////////////////////////////////////////
 void foundGlimmer(square mysqr){
-	//do what you're supposed to do when you find glimmer
 	printf("Found glimmer!\n");
 	updatesSurroundingMightBes(mysqr, 'g');
-	// Figure out where to move next, probably to one of these spots
 }
 
 void foundStench(square mysqr){
-	//do what you're supposed to do when you find a stench
-	// mark the squares around as potential wumpus
-	//go back and try a different something
 	printf("Found stench!\n");
 	updatesSurroundingMightBes(mysqr, 's');
 }
 
 void foundBreeze(square mysqr){
-	//do what you're supposed to do when you find a breeze
-	// mark the squares around as potential pit
-	//go back and try a different something
 	printf("Found breeze!\n");
 	updatesSurroundingMightBes(mysqr, 'b');
 }
