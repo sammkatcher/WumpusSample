@@ -54,65 +54,67 @@ int getObjectInfo(char object)
 	return 0;
 }
 
-void updateMightBe(my_grid[cur_x][cur_y], char x){
 
-	char mightBeX[20];
-
-	if (x == 'g'){ // mightBeGold
-		mightBeX = "mightBeGold";
-	}
-
-	if (x == 's'){
-		mightBeX = "mightBeWumpus";
-	}
-	if (x == 'b'){
-		mightBeX = "mightBeBreeze";
-	}
-
+void updatesSurroundingMightBes(square my_grid[BOARDSIZE][BOARDSIZE], point cur_loc, char x){
+	
 	if (!isOutOfBounds(my_grid[cur_x+1][cur_y] && (my_grid[cur_x+1][cur_y].isUnknown)){
-		my_grid[cur_x+1][cur_y].mightBeX = true;
+		updateMightBe(x, my_grid[cur_x+1][cur_y]);
 	}
 	if (!isOutOfBounds(my_grid[cur_x-1][cur_y] && (my_grid[cur_x-1][cur_y].isUnknown)){
-		my_grid[cur_x-1][cur_y].mightBeX = true;
+		updateMightBe(x, my_grid[cur_x-1][cur_y]);
 	}
 	if (!isOutOfBounds(my_grid[cur_x][cur_y+1] && (my_grid[cur_x][cur_y+1].isUnknown)){
-		my_grid[cur_x][cur_y+1].mightBeX = true;
+		updateMightBe(x, my_grid[cur_x][cur_y+1]);
 	}
 	if (!isOutOfBounds(my_grid[cur_x][cur_y-1] && (my_grid[cur_x][cur_y-1].isUnknown)){
-		my_grid[cur_x][cur_y-1].mightBeX = true;
+		updateMightBe(x, my_grid[cur_x][cur_y-1]);
 	}
 }
 
-void foundGold(my_grid[cur_x][cur_y]){
+
+void updateMightBe(char x, , square sqr){
+
+	if (x == 'g'){ // mightBeGold
+		sqr.mightBeGold = true;
+	}
+
+	if (x == 's'){ // might be wumpus
+		sqr.mightBeWumpus = true;
+	}
+	if (x == 'b'){ // might be pit
+		sqr.mightBePit = true;
+	}
+}
+
+void foundGold(square mysqr){
 	// do what you're supposed to do when you find gold
-	my_grid[cur_x][cur_y].isGold = true;
+	mysqr.isGold = true;
 	printf("Found gold!\n");
 }
 
-void foundGlimmer(my_grid[cur_x][cur_y]){
+void foundGlimmer(square mysqr){
 	//do what you're supposed to do when you find glimmer
 	printf("Found glimmer!\n");
 	// move safely around in glimmer squares until you find the gold
 	// for each surrounding square except the ones you've visited, change mightBeGold to True
-	updateMightBe(my_grid[cur_x][cur_y], 'g');
+	updateMightBe(mysqr, 'g');
 	// Figure out where to move next, probably to one of these spots
 }
 
-void foundStench(my_grid[cur_x][cur_y]){
+void foundStench(square mysqr){
 	//do what you're supposed to do when you find a stench
 	// mark the squares around as potential wumpus
 	//go back and try a different something
 	printf("Found stench!\n");
-	updateMightBe(my_grid[cur_x][cur_y], 's');
+	updateMightBe(mysqr, 's');
 }
 
-
-void foundBreeze(my_grid[cur_x][cur_y]){
+void foundBreeze(square mysqr){
 	//do what you're supposed to do when you find a breeze
 	// mark the squares around as potential pit
 	//go back and try a different something
 	printf("Found breeze!\n");
-	updateMightBe(my_grid[cur_x][cur_y], 'b');
+	updateMightBe(mysqr, 'b');
 }
 
 void goldNearPitEdgeCase(){
@@ -131,29 +133,42 @@ void triangulateDanger(){
 	// if oyu know 2 squares arond a corner has something, then it's definite
 }
 
-void convertSenseNumber(int input){
+void convertSenseNumber(int input, point cur_loc, square my_grid[BOARDSIZE][BOARDSIZE]){
 	// given an input
 	// given as a number that is a sum of the possible inputs
 	// gold = 8, glimmer = 4, stench = 2, breeze = 1, nothing = 0
 	// code does not keep track of the orientation of the robot
 	// if the add is greater than 8, you're on the gold. cannot take more user input.
 	//must go back to start.
-
+	int cur_x = cur_loc.x;
+	int cur_y = cur_loc.y;
 	// Using a single ampersand does bitwise and to
-        //   determine what the input is.
-/*      if(input & 0x00000008) // Input is: on gold
-            printf("Gold! ");
-            // do what needs to be done when found gold 
-        if(input & 0x00000004) // Input is: near gold
-            printf("Glimmer! ");
-        if(input & 0x00000002) // Input is: near wumpus
-            printf("Wumpus! ");
-        if(input & 0x00000001) // Input is: near hole
-        {
-            printf("Breeze! ");
-        }
-        printf("\n");
-        fflush(stdout);*/
+    //   determine what the input is.
+    if(input & 0x00000008){
+    	// Input is: on gold
+        printf("Gold! ");
+        // do what needs to be done when found gold
+    }  
+    if(input & 0x00000004){
+    	// Input is: near gold
+        printf("Glimmer! ");
+	}
+    if(input & 0x00000002){
+    	// Input is: near wumpus
+        printf("Wumpus! ");
+    	my_grid[cur_x+1][cur_y].mightBeWumpus = true;
+    	my_grid[cur_x-1][cur_y].mightBeWumpus = true;
+    	my_grid[cur_x][cur_y+1].mightBeWumpus = true;
+    	my_grid[cur_x][cur_y-1].mightBeWumpus = true;
+
+    }
+    if(input & 0x00000001){
+    	// Input is: near hole
+    	printf("Breeze! ");	
+    }
+    
+    printf("\n");
+    fflush(stdout);
 }
 
 int main(){

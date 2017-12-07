@@ -19,7 +19,6 @@ struct square_struct {
 	bool mightBeWumpus;
 	bool mightBePit;
 	bool mightBeGold;
-	bool currentSquare;
 	bool visited;
 
 } square_default = {true, false, false, false, false, false, false, false, false};
@@ -72,8 +71,8 @@ int main(){
 	#define PATH_SIZE 1000
 	point path[PATH_SIZE];
 	//Set the first point in the path to be 0,0
-	point start_loc = 0,0;
-	path[0] = start_loc;
+	point currentSquare = {0,0};
+	path[0] = currentSquare;
 
 	//create m and n as counters
 	int m,n;
@@ -88,7 +87,6 @@ int main(){
 	}
 	//Starting space is safe
 	grid[0][0].isSafe = true;
-	grid[0][0].currentSquare = true;
 	grid[0][0].visited = true;
 	
 
@@ -141,7 +139,7 @@ int main(){
         {
         	// Input is: on gold
             printf("Gold! ");
-            grid[cur_x][cur_y].isGold = true;
+            
         } 
 
         if(input & 0x00000004)
